@@ -252,7 +252,7 @@ int main(int argc, char* argv[])
 	else
 	{
 		std::cout << "Manual activation, no parameters supplied\n";
-		//exit(1);
+		exit(1);
 
 		manual_activation = true;
 
