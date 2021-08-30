@@ -1,0 +1,8 @@
+*.or
+*.o
+x64/
+*.exe
+Debug/
+.pyc
+*.lnk
+VTune Profiler Results/

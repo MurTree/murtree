@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="code\MurTree\Data Structures\binary_data.cpp" />
+    <ClCompile Include="code\MurTree\Data Structures\branch.cpp" />
+    <ClCompile Include="code\MurTree\Data Structures\decision_tree.cpp" />
+    <ClCompile Include="code\MurTree\Data Structures\feature_vector_binary.cpp" />
+    <ClCompile Include="code\MurTree\Data Structures\internal_node_description.cpp" />
+    <ClCompile Include="code\MurTree\Data Structures\key_value_heap.cpp" />
+    <ClCompile Include="code\MurTree\Data Structures\symmetric_matrix_counter.cpp" />
+    <ClCompile Include="code\MurTree\Data Structures\symmetric_matrix_positive_negative_counter_2d.cpp" />
+    <ClCompile Include="code\MurTree\Engine\binary_data_difference_computer.cpp" />
+    <ClCompile Include="code\MurTree\Engine\branch_cache.cpp" />
+    <ClCompile Include="code\MurTree\Engine\cache_closure.cpp" />
+    <ClCompile Include="code\MurTree\Engine\dataset_cache.cpp" />
+    <ClCompile Include="code\MurTree\Engine\feature_selector_abstract.cpp" />
+    <ClCompile Include="code\MurTree\Engine\hyper_parameter_tuner.cpp" />
+    <ClCompile Include="code\MurTree\Engine\similarity_lower_bound_computer.cpp" />
+    <ClCompile Include="code\MurTree\Engine\solver.cpp" />
+    <ClCompile Include="code\MurTree\Engine\specialised_binary_classification_decision_tree_solver.cpp" />
+    <ClCompile Include="code\MurTree\Engine\specialised_branch_misclassification_computer.cpp" />
+    <ClCompile Include="code\MurTree\Engine\specialised_general_branch_misclassification_computer.cpp" />
+    <ClCompile Include="code\MurTree\Engine\specialised_general_classification_decision_tree_solver.cpp" />
+    <ClCompile Include="code\MurTree\Utilities\file_reader.cpp" />
+    <ClCompile Include="code\MurTree\Utilities\parameter_handler.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="code\MurTree\Data Structures\binary_data.h" />
+    <ClInclude Include="code\MurTree\Data Structures\branch.h" />
+    <ClInclude Include="code\MurTree\Data Structures\children_information.h" />
+    <ClInclude Include="code\MurTree\Data Structures\child_subtree_info.h" />
+    <ClInclude Include="code\MurTree\Data Structures\child_subtree_ordering.h" />
+    <ClInclude Include="code\MurTree\Data Structures\decision_node.h" />
+    <ClInclude Include="code\MurTree\Data Structures\decision_tree.h" />
+    <ClInclude Include="code\MurTree\Data Structures\feature_vector_binary.h" />
+    <ClInclude Include="code\MurTree\Data Structures\internal_node_description.h" />
+    <ClInclude Include="code\MurTree\Data Structures\key_value_heap.h" />
+    <ClInclude Include="code\MurTree\Data Structures\sparse_binary_vector.h" />
+    <ClInclude Include="code\MurTree\Data Structures\split_binary_data.h" />
+    <ClInclude Include="code\MurTree\Data Structures\symmetric_matrix_counter.h" />
+    <ClInclude Include="code\MurTree\Data Structures\symmetric_matrix_positive_negative_counter_2d.h" />
+    <ClInclude Include="code\MurTree\Engine\abstract_cache.h" />
+    <ClInclude Include="code\MurTree\Engine\binary_data_difference_computer.h" />
+    <ClInclude Include="code\MurTree\Engine\branch_cache.h" />
+    <ClInclude Include="code\MurTree\Engine\cache_closure.h" />
+    <ClInclude Include="code\MurTree\Engine\dataset_cache.h" />
+    <ClInclude Include="code\MurTree\Engine\feature_selector_abstract.h" />
+    <ClInclude Include="code\MurTree\Engine\feature_selector_gini.h" />
+    <ClInclude Include="code\MurTree\Engine\feature_selector_in_order.h" />
+    <ClInclude Include="code\MurTree\Engine\feature_selector_random.h" />
+    <ClInclude Include="code\MurTree\Engine\hyper_parameter_tuner.h" />
+    <ClInclude Include="code\MurTree\Engine\similarity_lower_bound_computer.h" />
+    <ClInclude Include="code\MurTree\Engine\solver.h" />
+    <ClInclude Include="code\MurTree\Engine\specialised_binary_classification_decision_tree_solver.h" />
+    <ClInclude Include="code\MurTree\Engine\specialised_branch_misclassification_computer.h" />
+    <ClInclude Include="code\MurTree\Engine\specialised_decision_tree_solver_abstract.h" />
+    <ClInclude Include="code\MurTree\Engine\specialised_general_branch_misclassification_computer.h" />
+    <ClInclude Include="code\MurTree\Engine\specialised_general_classification_decision_tree_solver.h" />
+    <ClInclude Include="code\MurTree\Utilities\file_reader.h" />
+    <ClInclude Include="code\MurTree\Utilities\parameter_handler.h" />
+    <ClInclude Include="code\MurTree\Utilities\runtime_assert.h" />
+    <ClInclude Include="code\MurTree\Utilities\solver_result.h" />
+    <ClInclude Include="code\MurTree\Utilities\split_data.h" />
+    <ClInclude Include="code\MurTree\Utilities\statistics.h" />
+    <ClInclude Include="code\MurTree\Utilities\stopwatch.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{2d4bed84-592c-487b-8fba-59612da97afe}</ProjectGuid>
+    <RootNamespace>MurTree</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="code\MurTree\Data Structures\binary_data.cpp">
+      <Filter>Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="code\MurTree\Data Structures\branch.cpp">
+      <Filter>Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="code\MurTree\Data Structures\decision_tree.cpp">
+      <Filter>Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="code\MurTree\Data Structures\feature_vector_binary.cpp">
+      <Filter>Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="code\MurTree\Data Structures\internal_node_description.cpp">
+      <Filter>Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="code\MurTree\Data Structures\key_value_heap.cpp">
+      <Filter>Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="code\MurTree\Data Structures\symmetric_matrix_counter.cpp">
+      <Filter>Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="code\MurTree\Data Structures\symmetric_matrix_positive_negative_counter_2d.cpp">
+      <Filter>Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="code\MurTree\Engine\binary_data_difference_computer.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="code\MurTree\Engine\branch_cache.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="code\MurTree\Engine\cache_closure.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="code\MurTree\Engine\dataset_cache.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="code\MurTree\Engine\feature_selector_abstract.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="code\MurTree\Engine\hyper_parameter_tuner.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="code\MurTree\Engine\similarity_lower_bound_computer.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="code\MurTree\Engine\solver.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="code\MurTree\Engine\specialised_binary_classification_decision_tree_solver.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="code\MurTree\Engine\specialised_branch_misclassification_computer.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="code\MurTree\Engine\specialised_general_branch_misclassification_computer.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="code\MurTree\Engine\specialised_general_classification_decision_tree_solver.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="code\MurTree\Utilities\file_reader.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="code\MurTree\Utilities\parameter_handler.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Data Structures">
+      <UniqueIdentifier>{235aebd9-1f1e-42a7-8995-8411f54d3c44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{14299d73-4851-4cec-822a-a264626461a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{45cc0da3-92e9-44e6-8c65-f1e92fcb1412}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="code\MurTree\Data Structures\binary_data.h">
+      <Filter>Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Data Structures\branch.h">
+      <Filter>Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Data Structures\child_subtree_info.h">
+      <Filter>Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Data Structures\child_subtree_ordering.h">
+      <Filter>Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Data Structures\children_information.h">
+      <Filter>Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Data Structures\decision_node.h">
+      <Filter>Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Data Structures\decision_tree.h">
+      <Filter>Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Data Structures\feature_vector_binary.h">
+      <Filter>Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Data Structures\internal_node_description.h">
+      <Filter>Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Data Structures\key_value_heap.h">
+      <Filter>Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Data Structures\sparse_binary_vector.h">
+      <Filter>Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Data Structures\split_binary_data.h">
+      <Filter>Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Data Structures\symmetric_matrix_counter.h">
+      <Filter>Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Data Structures\symmetric_matrix_positive_negative_counter_2d.h">
+      <Filter>Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Engine\abstract_cache.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Engine\binary_data_difference_computer.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Engine\branch_cache.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Engine\cache_closure.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Engine\dataset_cache.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Engine\feature_selector_abstract.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Engine\feature_selector_gini.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Engine\feature_selector_in_order.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Engine\feature_selector_random.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Engine\hyper_parameter_tuner.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Engine\similarity_lower_bound_computer.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Engine\solver.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Engine\specialised_binary_classification_decision_tree_solver.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Engine\specialised_branch_misclassification_computer.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Engine\specialised_decision_tree_solver_abstract.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Engine\specialised_general_branch_misclassification_computer.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Engine\specialised_general_classification_decision_tree_solver.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Utilities\file_reader.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Utilities\parameter_handler.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Utilities\runtime_assert.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Utilities\solver_result.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Utilities\split_data.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Utilities\statistics.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Utilities\stopwatch.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
