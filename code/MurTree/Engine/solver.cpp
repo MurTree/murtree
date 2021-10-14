@@ -328,44 +328,41 @@ DecisionNode* Solver::ConstructOptimalTree(BinaryDataInternal& data, Branch& bra
 }
 
 InternalNodeDescription Solver::SolveSubtree(BinaryDataInternal& data, Branch& branch, int max_depth, int num_nodes, int upper_bound)
-{
+{//corresponds to Algorithm 1 from the paper
 	runtime_assert(0 <= max_depth && max_depth <= num_nodes);
 	
 	if (!stopwatch_.IsWithinTimeLimit()) { return CreateInfeasibleNodeDescription(); }
-
-	//corresponds to Algorithm 1 from the paper
-
+	
 	// Prune based on upper bound
 	if (upper_bound < 0) { return CreateInfeasibleNodeDescription(); }
 
-	// Base case (Eq. 1): no feature nodes are possible
+	// Base case (Eq. 1), second case: no feature nodes are possible
 	if (max_depth == 0 || num_nodes == 0) { return (LeafMisclassification(data) > upper_bound ? CreateInfeasibleNodeDescription() : CreateLeafNodeDescription(data)); }
 	
-	// Use cached subtrees if possible (Section 4.7)
+	// Use cached subtrees if possible (Section 4.5)
 	InternalNodeDescription cached_optimal_node = cache_->RetrieveOptimalAssignment(data, branch, max_depth, num_nodes);
 	if (!cached_optimal_node.IsInfeasible())
 	{		
 		return (cached_optimal_node.Misclassifications() > upper_bound ? CreateInfeasibleNodeDescription() : cached_optimal_node);
 	}
 
-	// Update the cache using the similarity-based lower bound (Section TODO)
-	// If an optimal solution was found in the process, return it.
+	// Update the cache using the similarity-based lower bound (Section 4.4)
+	// Note that an optimal solution may be found in the process
 	bool updated_optimal_solution = UpdateCacheUsingSimilarity(data, branch, max_depth, num_nodes);
 	if (updated_optimal_solution)
 	{
 		InternalNodeDescription optimal_node = cache_->RetrieveOptimalAssignment(data, branch, max_depth, num_nodes);
 		return (optimal_node.Misclassifications() > upper_bound ? CreateInfeasibleNodeDescription() : optimal_node);
 	}
-
 	int lower_bound = cache_->RetrieveLowerBound(data, branch, max_depth, num_nodes);
-	
-	// Prune if the lower bound exceeds the upper bound, since no tree can be found within the upper bound requirement
+	// Prune if the lower bound exceeds the upper bound, since no tree can be found within the upper bound requirement (Section 4.5.4)
 	if (lower_bound > upper_bound) { return CreateInfeasibleNodeDescription(); }
 	
 	// If the leaf node is already at the lower bound, no need to look further
 	if (lower_bound == LeafMisclassification(data)) { return CreateLeafNodeDescription(data); }
 
-	// Use the specialised algorithm from Section 4.3 for small trees
+	// Use Algorithm 4 for small trees from Section 4.3
+	// Note that the specialised algorithm updates the cache
 	if (IsTerminalNode(max_depth, num_nodes)) { return SolveTerminalNode(data, branch, max_depth, num_nodes, upper_bound); }
 
 	// General (fourth) case (Eq. 1): Exhaustively search using Algorithm 2 
@@ -373,17 +370,18 @@ InternalNodeDescription Solver::SolveSubtree(BinaryDataInternal& data, Branch& b
 }
 
 InternalNodeDescription Solver::SolveSubtreeGeneralCase(BinaryDataInternal& data, Branch& branch, int max_depth, int num_nodes, int upper_bound)
-{
+{//Algorithm 2 from the paper
 	runtime_assert(max_depth <= num_nodes);
 
+	//Use a single classification node as an initial solution
 	InternalNodeDescription best_node = CreateInfeasibleNodeDescription();
 	if (LeafMisclassification(data) <= upper_bound) { best_node = CreateLeafNodeDescription(data); }
 
 	SplitBinaryData& split_data = *splits_data[max_depth];
 
-	int lower_bound_refined = INT32_MAX;
-	int branch_lower_bound = cache_->RetrieveLowerBound(data, branch, max_depth, num_nodes);
-	int max_size_subtree = std::min((1 << (max_depth - 1)) - 1, num_nodes - 1); //take the minimum between a full tree of max_depth or the number of nodes - 1
+	int lower_bound_refined = INT32_MAX; //'lower_bound_refined' refers to the refined lower bound in Eq. 16
+	int branch_lower_bound = cache_->RetrieveLowerBound(data, branch, max_depth, num_nodes); //find the lower bound stored in the cache (Section 4.5.4)
+	int max_size_subtree = std::min((1 << (max_depth - 1)) - 1, num_nodes - 1); //compute allowed number of nodes for child subtrees, by taking the minimum between a full tree of max_depth or the number of nodes - 1
 	int min_size_subtree = num_nodes - 1 - max_size_subtree;
 
 	feature_selectors_[max_depth]->Reset(data);
@@ -391,25 +389,31 @@ InternalNodeDescription Solver::SolveSubtreeGeneralCase(BinaryDataInternal& data
 	{
 		int splitting_feature = feature_selectors_[max_depth]->PopNextFeature();
 		if (!stopwatch_.IsWithinTimeLimit()) { return CreateInfeasibleNodeDescription(); }
-
+		// If the current best node is the optimal node, stop
 		if (best_node.IsFeasible() && best_node.Misclassifications() == branch_lower_bound) { break; }
 
 		split_data.SplitData(splitting_feature, data);
-		if (split_data.data_without_feature.Size() == 0 || split_data.data_with_feature.Size() == 0) { continue; } //the split is nondiscriminatory and leads to a degenerate tree, no need to consider it further
+		//Nondiscriminatory splits should be avoided
+		if (split_data.data_without_feature.Size() == 0 || split_data.data_with_feature.Size() == 0) { continue; } 
 
 		Branch left_branch = Branch::LeftChildBranch(branch, splitting_feature);
 		Branch right_branch = Branch::RightChildBranch(branch, splitting_feature);
-
 		for (int left_subtree_size = min_size_subtree; left_subtree_size <= max_size_subtree; left_subtree_size++)
 		{
+			//in the paper this loop is presented as part of Algorithm 3
+
 			int right_subtree_size = num_nodes - left_subtree_size - 1; //the '-1' is necessary since using the parent node counts as a node
 						
+			//decide on the order of child nodes
+			//the result is stored in 'first_child' and 'second_child'
+			//a static order would always have first_child to be the left node, whereas in dynamic this is determined on the fly
 			ChildSubtreeInfo left_subtree_info(&split_data.data_without_feature, left_branch, std::min(max_depth - 1, left_subtree_size), left_subtree_size);
 			ChildSubtreeInfo right_subtree_info(&split_data.data_with_feature, right_branch, std::min(max_depth - 1, right_subtree_size), right_subtree_size);
 			ChildSubtreeOrdering sorted_children = GetSortedChildren(left_subtree_info, right_subtree_info);
 			ChildSubtreeInfo& first_child = sorted_children.first_child;
 			ChildSubtreeInfo& second_child = sorted_children.second_child;
 
+			//Impose an upper bound that ensures that a feasible tree will have fewer misclassifications than the best tree found so far
 			int first_child_upper_bound = std::min((best_node.IsFeasible() ? best_node.Misclassifications() - 1 : INT32_MAX), upper_bound) 
 											- cache_->RetrieveLowerBound(*second_child.binary_data, second_child.branch, second_child.depth, second_child.size);
 			InternalNodeDescription first_child_solution = SolveSubtree(
@@ -422,7 +426,7 @@ InternalNodeDescription Solver::SolveSubtreeGeneralCase(BinaryDataInternal& data
 
 			if (!stopwatch_.IsWithinTimeLimit()) { return CreateInfeasibleNodeDescription(); }
 
-			// No need to compute the other subtree if this one failed
+			// No need to compute the other subtree if the first_child is infeasible
 			if (first_child_solution.IsInfeasible())
 			{
 				int local_bound = cache_->RetrieveLowerBound(*left_subtree_info.binary_data, left_branch, left_subtree_info.depth, left_subtree_size) 
@@ -468,13 +472,14 @@ InternalNodeDescription Solver::SolveSubtreeGeneralCase(BinaryDataInternal& data
 
 	if (!stopwatch_.IsWithinTimeLimit()) { return CreateInfeasibleNodeDescription(); }
 
-	// Cache the optimal solution or record the lower bound (Section 4.6.1)
+	// Cache the optimal solution...
 	if (best_node.IsFeasible())
 	{
 		runtime_assert(best_node.Misclassifications() <= upper_bound);
 		cache_->StoreOptimalBranchAssignment(data, branch, best_node, max_depth, num_nodes);
 		similarity_lower_bound_computer_->UpdateArchive(data, branch, max_depth);
 	}
+	// ...or record the lower bound (Section 4.5.3)
 	else
 	{//is infeasible
 		lower_bound_refined = std::max(lower_bound_refined, upper_bound + 1);
@@ -554,7 +559,7 @@ InternalNodeDescription Solver::SolveTerminalNode(BinaryDataInternal& data, Bran
 
 bool Solver::UpdateCacheUsingSimilarity(BinaryDataInternal& data, Branch& branch, int max_depth, int num_nodes)
 {
-	// Compute the similarity-based lower bound (Section 4.5) and update current bound
+	// Compute the similarity-based lower bound (Section 4.4) and update current bound
 	PairLowerBoundOptimal result = similarity_lower_bound_computer_->ComputeLowerBound(data, branch, max_depth, num_nodes, cache_);
 	if (result.optimal) { return true; }
 	if (result.lower_bound > 0) { cache_->UpdateLowerBound(data, branch, result.lower_bound, max_depth, num_nodes); }

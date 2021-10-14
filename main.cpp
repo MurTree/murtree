@@ -1,8 +1,8 @@
 ﻿//todo add license
 
-//Code for the paper: "MurTree: optimal classification trees via dynamic programming and search"
+//Code for the paper: "MurTree: optimal classification trees via dynamic programming and search". Note that some of the comments directly refer to the paper.
 //Authors: Emir Demirović, Anna Lukina, Emmanuel Hebrard, Jeffrey Chan, James Bailey, Christopher Leckie, Kotagiri Ramamohanarao, Peter J. Stuckey
-//For any issues related to the code, please feel free to contact Emir Demirović, e.demirovic@tudelft.nl
+//For any issues related to the code, please feel free to contact Dr Emir Demirović, e.demirovic@tudelft.nl
 
 #include "code/MurTree/Engine/solver.h"
 #include "code/MurTree/Engine/dataset_cache.h"
