@@ -1,6 +1,10 @@
 # README #
 
-The code in the repository implements the MurTree algorithm for constructing optimal classification trees, i.e., trees that minimise the misclassification score of the given dataset while respecting constraints on the depth and number of feature nodes. The sparse objective, that takes penalises each node added in the tree, is also supported. Details about the algorithm may be found in the paper "MurTree: Optimal Decision Trees via Dynamic Programming and Search" by Emir Demirović, Anna Lukina, Emmanuel Hebrard, Jeffrey Chan, James Bailey, Christopher Leckie, Kotagiri Ramamohanarao, and Peter J. Stuckey.
+The code in the repository implements the MurTree algorithm for constructing optimal classification trees, i.e., trees that minimise the misclassification score of the given dataset while respecting constraints on the depth and number of feature nodes. The sparse objective, that takes penalises each node added in the tree, is also supported. 
+
+Details about the algorithm may be found in the paper:
+
+"MurTree: Optimal Decision Trees via Dynamic Programming and Search" by Emir Demirović, Anna Lukina, Emmanuel Hebrard, Jeffrey Chan, James Bailey, Christopher Leckie, Kotagiri Ramamohanarao, and Peter J. Stuckey, Journal of Machine Learning Research (JMLR), 2021.
 
 ### What does the algorithm do? ###
 
