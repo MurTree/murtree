@@ -228,6 +228,7 @@ void DatasetCache::InvalidateStoredIterators(BinaryDataInternal& data)
 
 std::unordered_map<BinaryDataInternal, std::vector<CacheEntry>, DatasetHashFunction, DatasetEquality>::iterator DatasetCache::FindIterator(BinaryDataInternal& data, const Branch& branch)
 {
+	//check to see if the entry is cached and return it if so
 	for (PairIteratorBranch& p : stored_iterators_[data.Size()])
 	{
 		if (p.branch == branch) { return p.iter; }
@@ -237,6 +238,8 @@ std::unordered_map<BinaryDataInternal, std::vector<CacheEntry>, DatasetHashFunct
 
 	auto& hashmap = cache_[data.Size()];
 	auto iter = hashmap.find(data);
+
+	if (iter == hashmap.end()) { return iter; }
 
 	PairIteratorBranch hehe;
 	hehe.branch = branch;

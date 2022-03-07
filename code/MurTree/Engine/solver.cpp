@@ -141,7 +141,7 @@ SolverResult Solver::Solve(ParameterHandler& parameters)
 	{
 		if (!stopwatch_.IsWithinTimeLimit()) { break; }
 
-		std::cout << "num nodes: " << num_nodes << " " << stopwatch_.TimeElapsedInSeconds() << "s" << std::endl;
+		if (verbose_) std::cout << "num nodes: " << num_nodes << " " << stopwatch_.TimeElapsedInSeconds() << "s" << std::endl;
 		
 		int max_depth = std::min(int(parameters.GetIntegerParameter("max-depth")), num_nodes);
 		int misclassification_upper_bound = std::min(best_solution.SparseObjective(sparse_coefficient) - sparse_coefficient*num_nodes - 1, int(parameters.GetIntegerParameter("upper-bound")) - sparse_coefficient * num_nodes);
@@ -482,6 +482,8 @@ InternalNodeDescription Solver::SolveSubtreeGeneralCase(BinaryDataInternal& data
 	// ...or record the lower bound (Section 4.5.3)
 	else
 	{//is infeasible
+		if (lower_bound_refined == INT32_MAX) { lower_bound_refined = 0; }
+
 		lower_bound_refined = std::max(lower_bound_refined, upper_bound + 1);
 		int new_lower_bound = std::max(branch_lower_bound, lower_bound_refined);
 		cache_->UpdateLowerBound(data, branch, new_lower_bound, max_depth, num_nodes);

@@ -30,10 +30,10 @@ struct CacheEntry
 
 	InternalNodeDescription GetOptimalSolution() const { runtime_assert(IsOptimal()); return optimal_assignment; }
 
-	int GetOptimalValue() const { runtime_assert(IsOptimal());  return optimal_assignment.Misclassifications(); }
+	int GetOptimalValue() const { runtime_assert(IsOptimal()); return optimal_assignment.Misclassifications(); }
 
-	int GetLowerBound() const { runtime_assert(lower_bound >= 0); return lower_bound; }
-
+	int GetLowerBound() const { runtime_assert(lower_bound >= 0 && lower_bound < INT32_MAX); return lower_bound; }
+	
 	void SetOptimalAssignment(const InternalNodeDescription& optimal_node)
 	{
 		runtime_assert(optimal_assignment.IsInfeasible());
@@ -43,7 +43,7 @@ struct CacheEntry
 
 	void UpdateLowerBound(int lb)
 	{
-		runtime_assert(lb >= 0 && (lb <= lower_bound && IsOptimal() || !IsOptimal()));
+		runtime_assert(lb < INT32_MAX&& lb >= 0 && (lb <= lower_bound && IsOptimal() || !IsOptimal()));
 		lower_bound = std::max(lower_bound, lb);
 	}
 

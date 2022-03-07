@@ -4,7 +4,7 @@ The code in the repository implements the MurTree algorithm for constructing opt
 
 Details about the algorithm may be found in the paper:
 
-"MurTree: Optimal Decision Trees via Dynamic Programming and Search" by Emir Demirović, Anna Lukina, Emmanuel Hebrard, Jeffrey Chan, James Bailey, Christopher Leckie, Kotagiri Ramamohanarao, and Peter J. Stuckey, Journal of Machine Learning Research (JMLR), 2021.
+"MurTree: Optimal Decision Trees via Dynamic Programming and Search" by Emir Demirović, Anna Lukina, Emmanuel Hebrard, Jeffrey Chan, James Bailey, Christopher Leckie, Kotagiri Ramamohanarao, and Peter J. Stuckey, Journal of Machine Learning Research (JMLR), 2022. Available online at https://jmlr.org/papers/v23/20-520.html
 
 ### What does the algorithm do? ###
 

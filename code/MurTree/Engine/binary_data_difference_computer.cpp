@@ -36,9 +36,11 @@ DifferenceMetrics BinaryDataDifferenceComputer::ComputeDifferenceMetrics(BinaryD
 			
 			
 		}
-		metrics.total_difference += (size_new - index_new);
-		metrics.total_difference += (size_old - index_old);
-		metrics.num_removals += (size_old - index_old);
+		int num_new_instances = (size_new - index_new);
+		int num_removed_instances = (size_old - index_old);
+		metrics.total_difference += num_new_instances;
+		metrics.total_difference += num_removed_instances;
+		metrics.num_removals += num_removed_instances;
 	}
 	return metrics;
 }

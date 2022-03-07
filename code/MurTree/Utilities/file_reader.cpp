@@ -14,8 +14,6 @@ std::vector<std::vector<FeatureVectorBinary> > FileReader::ReadDataDL(std::strin
 	
 	std::ifstream file(filename.c_str());
 
-	system("dir");
-
 	if (!file) { std::cout << "Error: File " << filename << " does not exist!\n"; runtime_assert(file); }
 
 	std::string line;

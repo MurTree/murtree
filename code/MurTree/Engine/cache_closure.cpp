@@ -267,6 +267,7 @@ namespace MurTree
 
 	std::unordered_map<Branch, std::vector<CacheEntry>, BranchHashFunction, BranchEquality>::iterator ClosureCache::FindIterator(BinaryDataInternal& data, const Branch& branch)
 	{
+		//check to see if the entry is cached and return it if so
 		for (ClosureCache::PairIteratorBranch& p : stored_iterators_[data.Size()])
 		{
 			if (p.branch == branch) { return p.iter; }
@@ -276,6 +277,8 @@ namespace MurTree
 
 		auto& hashmap = cache_[data.Size()];
 		auto iter = hashmap.find(data.GetClosure());
+
+		if (iter == hashmap.end()) { return iter; }
 
 		ClosureCache::PairIteratorBranch hehe;
 		hehe.branch = branch;

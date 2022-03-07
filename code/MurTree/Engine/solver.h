@@ -18,7 +18,7 @@ namespace MurTree
 class Solver
 {
 public:
-	Solver(ParameterHandler&solver_parameters);
+	Solver(ParameterHandler &solver_parameters);
 	~Solver();
 
 	SolverResult Solve(ParameterHandler &runtime_parameters);

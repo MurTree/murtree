@@ -303,7 +303,7 @@ int main(int argc, char* argv[])
 		//hyper_parameter_stats_file = "datasetsTesting\\MurTreeHyperStats\\anneal_new.txt";
 		single_parameter_set_tuning = false;
 		parameters.SetIntegerParameter("duplicate-factor", 1);
-		parameters.SetStringParameter("cache-type", "dataset");// "closure";// "branch";// "dataset";// "closure";// "dataset";//"branch";// "dataset";//"branch";// "dataset";
+		parameters.SetStringParameter("cache-type", "dataset");// "closure";// "branch";
 		parameters.SetBooleanParameter("all-trees", false);
 		parameters.SetIntegerParameter("max-depth", 4);
 		parameters.SetIntegerParameter("max-num-nodes", 15);
