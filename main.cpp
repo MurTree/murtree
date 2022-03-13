@@ -1,6 +1,10 @@
-﻿//todo add license
+﻿//Distributed under the MIT license, see License.txt
+//Copyright © 2022 Emir Demirović
 
-//Code for the paper: "MurTree: optimal classification trees via dynamic programming and search". Note that some of the comments directly refer to the paper.
+//Code for the paper: 
+// "MurTree: optimal classification trees via dynamic programming and search", JMLR, 2022.
+//  Note that some of the comments directly refer to the paper:
+// 
 //Authors: Emir Demirović, Anna Lukina, Emmanuel Hebrard, Jeffrey Chan, James Bailey, Christopher Leckie, Kotagiri Ramamohanarao, Peter J. Stuckey
 //For any issues related to the code, please feel free to contact Dr Emir Demirović, e.demirovic@tudelft.nl
 

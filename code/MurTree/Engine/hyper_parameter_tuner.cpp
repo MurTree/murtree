@@ -1,3 +1,6 @@
+﻿//Distributed under the MIT license, see License.txt
+//Copyright © 2022 Emir Demirović
+
 #include "hyper_parameter_tuner.h"
 #include "solver.h"
 #include "../Utilities/split_data.h"

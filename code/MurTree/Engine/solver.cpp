@@ -1,4 +1,7 @@
-﻿#include "solver.h"
+﻿//Distributed under the MIT license, see License.txt
+//Copyright © 2022 Emir Demirović
+
+#include "solver.h"
 #include "specialised_binary_classification_decision_tree_solver.h"
 #include "specialised_general_classification_decision_tree_solver.h"
 #include "branch_cache.h"

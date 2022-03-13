@@ -1,3 +1,6 @@
+﻿//Distributed under the MIT license, see License.txt
+//Copyright © 2022 Emir Demirović
+
 #include "specialised_general_branch_misclassification_computer.h"
 #include "binary_data_difference_computer.h"
 

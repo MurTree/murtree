@@ -1,3 +1,6 @@
+﻿//Distributed under the MIT license, see License.txt
+//Copyright © 2022 Emir Demirović
+
 #include "branch.h"
 
 #include <algorithm>

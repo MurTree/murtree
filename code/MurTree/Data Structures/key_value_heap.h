@@ -1,3 +1,6 @@
+﻿//Distributed under the MIT license, see License.txt
+//Copyright © 2022 Emir Demirović
+
 #ifndef KEY_VALUE_HEAP
 #define KEY_VALUE_HEAP
 

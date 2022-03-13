@@ -111,9 +111,6 @@
     <ClInclude Include="code\MurTree\Data Structures\key_value_heap.h">
       <Filter>Data Structures</Filter>
     </ClInclude>
-    <ClInclude Include="code\MurTree\Data Structures\sparse_binary_vector.h">
-      <Filter>Data Structures</Filter>
-    </ClInclude>
     <ClInclude Include="code\MurTree\Data Structures\split_binary_data.h">
       <Filter>Data Structures</Filter>
     </ClInclude>

@@ -1,3 +1,6 @@
+﻿//Distributed under the MIT license, see License.txt
+//Copyright © 2022 Emir Demirović
+
 #include "similarity_lower_bound_computer.h"
 #include "binary_data_difference_computer.h"
 #include "../Utilities/runtime_assert.h"

@@ -1,9 +1,10 @@
+﻿//Distributed under the MIT license, see License.txt
+//Copyright © 2022 Emir Demirović
+
 #include "symmetric_matrix_positive_negative_counter_2d.h"
 #include "../Utilities/runtime_assert.h"
 
 #include <memory>
-
-
 
 namespace MurTree
 {

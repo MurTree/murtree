@@ -54,7 +54,6 @@
     <ClInclude Include="code\MurTree\Data Structures\feature_vector_binary.h" />
     <ClInclude Include="code\MurTree\Data Structures\internal_node_description.h" />
     <ClInclude Include="code\MurTree\Data Structures\key_value_heap.h" />
-    <ClInclude Include="code\MurTree\Data Structures\sparse_binary_vector.h" />
     <ClInclude Include="code\MurTree\Data Structures\split_binary_data.h" />
     <ClInclude Include="code\MurTree\Data Structures\symmetric_matrix_counter.h" />
     <ClInclude Include="code\MurTree\Data Structures\symmetric_matrix_positive_negative_counter_2d.h" />
