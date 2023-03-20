@@ -19,9 +19,6 @@ if(NOT cmake_build_type_tolower STREQUAL "debug"
   message(FATAL_ERROR "Unknown build type \"${CMAKE_BUILD_TYPE}\". Allowed values are Debug, Release (case-insensitive).")
 endif()
 
-# Set program ouput directory
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
-
 # Set C++ Standard
 set(CMAKE_CXX_STANDARD 14)
 
@@ -75,9 +72,33 @@ set(UTILITIES_SRC
   code/MurTree/Utilities/parameter_handler.cpp
 )
 
-add_executable(murtree main.cpp
+# MurTree can be built as a:
+#   - standalone app (default)
+#   - shared library
+option(BUILD_STANDALONE_APPLICATION "Build Murtree as a standalone application" OFF)
+option(BUILD_SHARED_LIBRARY "Build MurTree as a shared library" OFF)
+
+if(BUILD_STANDALONE_APPLICATION AND NOT BUILD_SHARED_LIBRARY)
+  # Build as a standalone app
+  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+  add_executable(murtree 
+    main.cpp
     ${DATA_STRUCTURES_SRC}
     ${ENGINE_SRC}
     ${UTILITIES_SRC}
-)
+  ) 
+elseif(BUILD_SHARED_LIBRARY AND NOT BUILD_STANDALONE_APPLICATION)
+  # Build as a shared library
+  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+  add_compile_definitions(BUILD_LIBRARY)
+  add_library(murtree SHARED
+    main.cpp
+    ${DATA_STRUCTURES_SRC}
+    ${ENGINE_SRC}
+    ${UTILITIES_SRC}
+    )
+else()
+    # More than one or none of the options are set to ON, show error message
+    message(FATAL_ERROR "Please select exactly one of the following options to build: BUILD_STANDALONE_APPLICATION or BUILD_SHARED_LIBRARY.")
+endif()
 

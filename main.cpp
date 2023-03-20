@@ -237,7 +237,7 @@ void CheckParameters(MurTree::ParameterHandler& parameters)
 	}
 }
 
-int main(int argc, char* argv[])
+int internalMain(int argc, char* argv[])
 {
 	MurTree::ParameterHandler parameters = DefineParameters();
 
@@ -399,3 +399,30 @@ int main(int argc, char* argv[])
 	}
 	return 0;
 }
+
+#ifdef BUILD_LIBRARY
+#include "murtree.h"
+	int murtree(std::string path_to_dataset, unsigned int maxdepth, unsigned int maxnumnodes, unsigned int time) {
+
+		std::string smaxdepth = std::to_string(maxdepth);
+		std::string smaxnumnodes = std::to_string(maxnumnodes);
+		std::string stime = std::to_string(time);
+
+		char* argv[9];
+		argv[0] = "./murtree";
+		argv[1] = "-file";
+		argv[2] =  const_cast<char*>(path_to_dataset.c_str());
+		argv[3] = "-max-depth";
+		argv[4] = const_cast<char*>(smaxdepth.c_str());
+		argv[5] = "-max-num-nodes";
+		argv[6] = const_cast<char*>(smaxnumnodes.c_str());
+		argv[7] = "-time";
+		argv[8] = const_cast<char*>(stime.c_str());
+		
+		return internalMain(9, argv);
+	}
+#else
+	int main(int argc, char* argv[]){
+		return internalMain(argc, argv);
+	}
+#endif
