@@ -77,8 +77,9 @@ set(UTILITIES_SRC
 #   - shared library
 option(BUILD_STANDALONE_APPLICATION "Build Murtree as a standalone application" OFF)
 option(BUILD_SHARED_LIBRARY "Build MurTree as a shared library" OFF)
+option(BUILD_PYTHON_MODULE "Build MurTree as a Python moduke" OFF)
 
-if(BUILD_STANDALONE_APPLICATION AND NOT BUILD_SHARED_LIBRARY)
+if(BUILD_STANDALONE_APPLICATION AND NOT BUILD_SHARED_LIBRARY AND NOT BUILD_PYTHON_MODULE)
   # Build as a standalone app
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
   add_executable(murtree 
@@ -87,7 +88,7 @@ if(BUILD_STANDALONE_APPLICATION AND NOT BUILD_SHARED_LIBRARY)
     ${ENGINE_SRC}
     ${UTILITIES_SRC}
   ) 
-elseif(BUILD_SHARED_LIBRARY AND NOT BUILD_STANDALONE_APPLICATION)
+elseif(BUILD_SHARED_LIBRARY AND NOT BUILD_STANDALONE_APPLICATION AND NOT BUILD_PYTHON_MODULE)
   # Build as a shared library
   set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
   add_compile_definitions(BUILD_LIBRARY)
@@ -97,8 +98,27 @@ elseif(BUILD_SHARED_LIBRARY AND NOT BUILD_STANDALONE_APPLICATION)
     ${ENGINE_SRC}
     ${UTILITIES_SRC}
     )
+elseif(BUILD_PYTHON_MODULE AND NOT BUILD_STANDALONE_APPLICATION AND NOT BUILD_SHARED_LIBRARY)
+  # Build as a Python module
+  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+  add_compile_definitions(BUILD_PYTHON_MODULE)
+  include(FetchContent)
+  FetchContent_Declare(
+    pybind11
+    GIT_REPOSITORY https://github.com/pybind/pybind11.git
+    GIT_TAG        5b0a6fc2017fcc176545afe3e09c9f9885283242 # Version 2.10.4
+  )
+  FetchContent_MakeAvailable(pybind11)
+  include_directories(${pybind11_SOURCE_DIR})
+  add_subdirectory(${pybind11_SOURCE_DIR})
+  pybind11_add_module(murtree_python_module
+    main.cpp 
+   ${DATA_STRUCTURES_SRC}
+    ${ENGINE_SRC}
+    ${UTILITIES_SRC}
+  )
 else()
     # More than one or none of the options are set to ON, show error message
-    message(FATAL_ERROR "Please select exactly one of the following options to build: BUILD_STANDALONE_APPLICATION or BUILD_SHARED_LIBRARY.")
+    message(FATAL_ERROR "Please select exactly one of the following options to build: BUILD_STANDALONE_APPLICATION, BUILD_SHARED_LIBRARY or BUILD_PYTHON_MODULE.")
 endif()
 

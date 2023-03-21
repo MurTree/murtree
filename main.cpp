@@ -400,8 +400,8 @@ int internalMain(int argc, char* argv[])
 	return 0;
 }
 
-#ifdef BUILD_LIBRARY
-#include "murtree.h"
+#if defined BUILD_LIBRARY || defined BUILD_PYTHON_MODULE
+	#include "murtree.h"
 	int murtree(std::string path_to_dataset, unsigned int maxdepth, unsigned int maxnumnodes, unsigned int time) {
 
 		std::string smaxdepth = std::to_string(maxdepth);
@@ -421,6 +421,13 @@ int internalMain(int argc, char* argv[])
 		
 		return internalMain(9, argv);
 	}
+	#ifdef BUILD_PYTHON_MODULE
+		#include "include/pybind11/pybind11.h"
+		PYBIND11_MODULE(murtree_python_module, m){
+			m.doc() = "Murtree module Docs";
+			m.def("murtree", &murtree);
+		}
+	#endif
 #else
 	int main(int argc, char* argv[]){
 		return internalMain(argc, argv);
