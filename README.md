@@ -26,6 +26,21 @@ Windows users can use the project files given for Visual Studio in the code.
 
 Linux users can use the provided makefile. Go to into the folder "LinuxRelease" and type "make all". The executable "MurTree" will appear in the same folder.
 
+#### Build MurTree as a standalone application, shared library or Python module using CMake
+
+An alternative way to build MurTree is using CMake (minimum version required 3.16.1). This route provides more flexibility and allows MurTree to be compiled as a standalone application, a shared library or a Python module.
+
+For Linux users, run the following commands from the top level directory of the repository:
+```shell
+mkdir build
+cd build
+#to compile as a standalone application: cmake .. -DBUILD_STANDALONE_APPLICATION=ON
+#to compile as a shared library: cmake .. -DBUILD_SHARED_LIBRARY=ON
+#to compile as a Python module: cmake .. -DBUILD_PYTHON_MODULE=ON
+make
+```
+Uncomment only one of the above lines. Only one target can be built at one time. The output files will be placed in the a bin directory.
+
 ### How do I run the code? ###
 
 After compiling you should have an executable of the program. Typically use of the code would look as follows:
