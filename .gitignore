@@ -6,3 +6,6 @@ Debug/
 .pyc
 *.lnk
 VTune Profiler Results/
+build/
+bin/
+CMakeFiles/

@@ -96,6 +96,27 @@ The above uses -max-depth 4 and -max-num-nodes 15. The instances may be found in
 
 * In case you need to optimise a nonlinear objective for a binary classification problem, have a look at our paper: Demirović, Emir; Peter J. Stuckey. "Optimal decision trees for nonlinear metrics.", AAAI'21.
 
+### Using the python module
+For now the python module can only be generated from the source code.
+To install the python module, run the following commands in the root directory of the project:
+
+```bash
+mkdir build
+cd build
+cmake .. -DBUILD_PYTHON_MODULE=ON
+make
+cd ../bin
+```
+Now you can use the module by importing it in python:
+
+```python
+import murtree_python_module as m
+m.murtree("../datasetsDL/anneal.txt" , 4 , 15, 600)
+
+```
+This should return the same result as the executable.
+
+
 ### Where do the instances come from? ###
 
 We collected benchmarks from other papers, binarising some of the datasets using our script (continuousToCategorical.r). The papers are as follows:
