@@ -70,6 +70,7 @@ set(ENGINE_SRC
 set(UTILITIES_SRC
   code/MurTree/Utilities/file_reader.cpp
   code/MurTree/Utilities/parameter_handler.cpp
+  code/MurTree/Utilities/parameters.cpp
 )
 
 # MurTree can be built as a:

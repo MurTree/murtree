@@ -41,6 +41,7 @@
     <ClCompile Include="code\MurTree\Engine\specialised_general_classification_decision_tree_solver.cpp" />
     <ClCompile Include="code\MurTree\Utilities\file_reader.cpp" />
     <ClCompile Include="code\MurTree\Utilities\parameter_handler.cpp" />
+    <ClCompile Include="code\MurTree\Utilities\parameters.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +77,7 @@
     <ClInclude Include="code\MurTree\Engine\specialised_general_classification_decision_tree_solver.h" />
     <ClInclude Include="code\MurTree\Utilities\file_reader.h" />
     <ClInclude Include="code\MurTree\Utilities\parameter_handler.h" />
+    <ClInclude Include="code\MurTree\Utilities\parameters.h" />
     <ClInclude Include="code\MurTree\Utilities\runtime_assert.h" />
     <ClInclude Include="code\MurTree\Utilities\solver_result.h" />
     <ClInclude Include="code\MurTree\Utilities\split_data.h" />

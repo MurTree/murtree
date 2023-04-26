@@ -5,15 +5,18 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../code/MurTree/Utilities/file_reader.cpp \
-../code/MurTree/Utilities/parameter_handler.cpp 
+../code/MurTree/Utilities/parameter_handler.cpp \
+../code/MurTree/Utilities/parameters.cpp 
 
 OBJS += \
 ./code/MurTree/Utilities/file_reader.o \
-./code/MurTree/Utilities/parameter_handler.o 
+./code/MurTree/Utilities/parameter_handler.o \
+./code/MurTree/Utilities/parameters.o
 
 CPP_DEPS += \
 ./code/MurTree/Utilities/file_reader.d \
-./code/MurTree/Utilities/parameter_handler.d 
+./code/MurTree/Utilities/parameter_handler.d \
+./code/MurTree/Utilities/parameter.d
 
 
 # Each subdirectory must supply rules for building sources it contributes
