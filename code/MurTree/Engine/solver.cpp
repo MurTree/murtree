@@ -13,6 +13,7 @@
 #include "../Utilities/runtime_assert.h"
 #include "../Utilities/file_reader.h"
 #include "../Data Structures/child_subtree_info.h"
+// #include <vector>
 
 namespace MurTree
 {
@@ -31,20 +32,25 @@ Solver::Solver(ParameterHandler& parameters):
 	else { std::cout << "Unknown node selection strategy: '" << parameters.GetStringParameter("node-selection") << "'\n"; exit(1); }
 
 	//start: read in the data
-	feature_vectors_ = FileReader::ReadDataDL(parameters.GetStringParameter("file"), parameters.GetIntegerParameter("duplicate-factor"));
-	num_labels_ = feature_vectors_.size();
-	num_features_ = -1;
-	for (auto& v : feature_vectors_) { if (!v.empty()) { num_features_ = v[0].NumTotalFeatures(); } } //could do better checking of the data
-	runtime_assert(num_features_ > 0 && num_labels_ > 1);
-
-	binary_data_ = new BinaryDataInternal(num_labels_, num_features_);
-	for (int label = 0; label < num_labels_; label++)
+	if (parameters.GetData().empty())
 	{
-		for (int i = 0; i < feature_vectors_[label].size(); i++)
+		feature_vectors_ = FileReader::ReadDataDL(parameters.GetStringParameter("file"), parameters.GetIntegerParameter("duplicate-factor"));
+		num_labels_ = feature_vectors_.size();
+		num_features_ = -1;
+		for (auto& v : feature_vectors_) { if (!v.empty()) { num_features_ = v[0].NumTotalFeatures(); } } //could do better checking of the data
+		runtime_assert(num_features_ > 0 && num_labels_ > 1);
+
+		binary_data_ = new BinaryDataInternal(num_labels_, num_features_);
+		for (int label = 0; label < num_labels_; label++)
 		{
-			binary_data_->AddFeatureVector(&feature_vectors_[label][i], label);
+			for (int i = 0; i < feature_vectors_[label].size(); i++)
+			{
+				binary_data_->AddFeatureVector(&feature_vectors_[label][i], label);
+			}
 		}
 	}
+	
+	else { feature_vectors_ = parameters.GetData();}
 	//end: read in the data
 
 	for(int i = 0; i < 100; i++) { splits_data[i] = new SplitBinaryData(num_labels_, num_features_); } 
@@ -115,7 +121,7 @@ Solver::~Solver()
 	for (int i = 0; i < feature_selectors_.size(); i++) { delete feature_selectors_[i]; }
 }
 
-void Solver::ReplaceData(std::vector<std::vector<FeatureVectorBinary> >& new_instances)
+void Solver::ReplaceData(std::vector<std::vector<FeatureVectorBinary>>& new_instances)
 {
 	runtime_assert(new_instances.size() == binary_data_->NumLabels());
 

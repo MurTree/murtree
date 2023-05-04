@@ -9,6 +9,9 @@
 #include <iostream>
 #include <limits>
 
+//import feature vector binary
+#include "../Data Structures/feature_vector_binary.h"
+
 //reserve special keyword for help
 
 //todo better error handling; also include these checks: 
@@ -20,6 +23,16 @@ namespace MurTree
 class ParameterHandler
 {
 public:
+	// This parameter is needed for the solver to not depend exclusively on a file read 
+	// To be able to call the Solver, the default value is nullptr
+	void SetData(const std::vector<std::vector<FeatureVectorBinary>>& feature_vectors_ = {} ) {
+        data_ = feature_vectors_;
+    }
+	
+	const std::vector<std::vector<FeatureVectorBinary>>& GetData() const {
+        return data_;
+    }
+
 	void DefineNewCategory(const std::string& category_name, const std::string short_description = "");
 	void DefineStringParameter(const std::string& parameter_name, const std::string& short_description, const std::string& default_value,
 		const std::string& category_name, const std::vector<std::string>& allowed_values = std::vector<std::string>()); //empty vector of allowed values means all values are allowed
@@ -45,6 +58,7 @@ public:
 	void PrintHelpSummary(std::ostream& out = std::cout);
 
 private:
+	std::vector<std::vector<FeatureVectorBinary>> data_;
 	void CheckStringParameter(const std::string& parameter_name, const std::string& value);
 	void CheckIntegerParameter(const std::string& parameter_name, int64_t value);
 	void CheckBooleanParameter(const std::string& parameter_name, bool value);
