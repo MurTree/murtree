@@ -33,24 +33,23 @@ Solver::Solver(ParameterHandler& parameters):
 
 	//start: read in the data
 	if (parameters.GetData().empty())
-	{
-		feature_vectors_ = FileReader::ReadDataDL(parameters.GetStringParameter("file"), parameters.GetIntegerParameter("duplicate-factor"));
-		num_labels_ = feature_vectors_.size();
-		num_features_ = -1;
-		for (auto& v : feature_vectors_) { if (!v.empty()) { num_features_ = v[0].NumTotalFeatures(); } } //could do better checking of the data
-		runtime_assert(num_features_ > 0 && num_labels_ > 1);
+	{feature_vectors_ = FileReader::ReadDataDL(parameters.GetStringParameter("file"), parameters.GetIntegerParameter("duplicate-factor"));}
 
-		binary_data_ = new BinaryDataInternal(num_labels_, num_features_);
-		for (int label = 0; label < num_labels_; label++)
+	else { feature_vectors_ = parameters.GetData();}
+	
+	num_labels_ = feature_vectors_.size();
+	num_features_ = -1;
+	for (auto& v : feature_vectors_) { if (!v.empty()) { num_features_ = v[0].NumTotalFeatures(); } } //could do better checking of the data
+	runtime_assert(num_features_ > 0 && num_labels_ > 1);
+
+	binary_data_ = new BinaryDataInternal(num_labels_, num_features_);
+	for (int label = 0; label < num_labels_; label++)
+	{
+		for (int i = 0; i < feature_vectors_[label].size(); i++)
 		{
-			for (int i = 0; i < feature_vectors_[label].size(); i++)
-			{
-				binary_data_->AddFeatureVector(&feature_vectors_[label][i], label);
-			}
+			binary_data_->AddFeatureVector(&feature_vectors_[label][i], label);
 		}
 	}
-	
-	else { feature_vectors_ = parameters.GetData();}
 	//end: read in the data
 
 	for(int i = 0; i < 100; i++) { splits_data[i] = new SplitBinaryData(num_labels_, num_features_); } 
