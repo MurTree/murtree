@@ -186,11 +186,6 @@ namespace MurTree {
     }
 
     void CheckParameters(ParameterHandler& parameters) {
-        if (parameters.GetStringParameter("file") == "") {
-            std::cout << "Error: No file given!\n";
-            exit(1);
-        }
-
         if (parameters.GetIntegerParameter("max-depth") > parameters.GetIntegerParameter("max-num-nodes")) {
             std::cout << "Error: The depth parameter is greater than the number of nodes!\n";
             exit(1);
