@@ -13,9 +13,128 @@
 #include "../Utilities/runtime_assert.h"
 #include "../Utilities/file_reader.h"
 #include "../Data Structures/child_subtree_info.h"
+// include vector
+#include <vector>
+// include feature vector binary
+#include "../Data Structures/feature_vector_binary.h"
 
 namespace MurTree
 {
+// We add an alternative solver constructor with feature_vectors as an argument
+// This is required if we want to provide an interface to the solver that does not depend on a file read
+// It is not the cleanest solution, but changing the constructor depending on files will cascade also
+// to other dependencies of the solver, therefore we add this alternative constructor
+Solver::Solver(ParameterHandler& parameters, const std::vector<std::vector<FeatureVectorBinary>>& feature_vectors):
+    verbose_(parameters.GetBooleanParameter("verbose")),
+    cache_(0),
+    binary_data_(0),
+    feature_selectors_(100, 0),
+    splits_data(100, 0),
+    similarity_lower_bound_computer_(0),
+    specialised_solver1_(0),
+    specialised_solver2_(0)
+{
+    if (parameters.GetStringParameter("node-selection") == "dynamic") { dynamic_child_selection_ = true; }
+    else if (parameters.GetStringParameter("node-selection") == "post-order") { dynamic_child_selection_ = false; }
+    else { std::cout << "Unknown node selection strategy: '" << parameters.GetStringParameter("node-selection") << "'\n"; exit(1); }
+
+    // start: read in the data
+    if (feature_vectors.empty())
+    {
+        feature_vectors_ = FileReader::ReadDataDL(parameters.GetStringParameter("file"), parameters.GetIntegerParameter("duplicate-factor"));
+    }
+
+	else { feature_vectors_ = feature_vectors; }
+    
+    num_labels_ = feature_vectors_.size();
+    num_features_ = -1;
+    for (auto& v : feature_vectors_) // could do better checking of the data
+    {
+        if (!v.empty()) 
+        {
+            num_features_ = v[0].NumTotalFeatures();
+        }
+    } 
+    runtime_assert(num_features_ > 0 && num_labels_ > 1);
+
+    binary_data_ = new BinaryDataInternal(num_labels_, num_features_);
+    for (int label = 0; label < num_labels_; label++)
+    {
+        for (int i = 0; i < feature_vectors_[label].size(); i++)
+        {
+            binary_data_->AddFeatureVector(&feature_vectors_[label][i], label);
+        }
+    }
+    // end: read in the data
+
+	binary_data_ = new BinaryDataInternal(num_labels_, num_features_);
+	for (int label = 0; label < num_labels_; label++)
+	{
+		for (int i = 0; i < feature_vectors_[label].size(); i++)
+		{
+			binary_data_->AddFeatureVector(&feature_vectors_[label][i], label);
+		}
+	}
+	//end: read in the data
+
+	for(int i = 0; i < 100; i++) { splits_data[i] = new SplitBinaryData(num_labels_, num_features_); } 
+	
+	for (int i = 0; i < 100; i++) 
+	{ 
+		if (parameters.GetStringParameter("feature-ordering") == "in-order") { feature_selectors_[i] = new FeatureSelectorInOrder(num_features_); }
+		else if (parameters.GetStringParameter("feature-ordering") == "random") { feature_selectors_[i] = new FeatureSelectorRandom(num_features_); }
+		else if (parameters.GetStringParameter("feature-ordering") == "gini") { feature_selectors_[i] = new FeatureSelectorGini(num_labels_, num_features_); }
+		else { std::cout << "Unknown feature ordering strategy!\n"; exit(1); }
+	}
+
+	similarity_lower_bound_computer_ = new SimilarityLowerBoundComputer(100, 100, binary_data_->Size());
+	if (parameters.GetBooleanParameter("similarity-lower-bound") == false) { similarity_lower_bound_computer_->Disable(); }
+
+	if (parameters.GetStringParameter("cache-type") == "branch") { cache_ = new BranchCache(100); }
+	else if (parameters.GetStringParameter("cache-type") == "dataset") { cache_ = new DatasetCache(binary_data_->Size()); }
+	else if (parameters.GetStringParameter("cache-type") == "closure") { cache_ = new ClosureCache(num_features_, binary_data_->Size()); }
+	else
+	{
+		std::cout << "Parameter error: unknown cache type: " << parameters.GetStringParameter("cache-type") << "\n";
+		runtime_assert(1 == 2);
+	}
+
+	if (binary_data_->NumLabels() == 2)
+	{
+		specialised_solver1_ = new SpecialisedBinaryClassificationDecisionTreeSolver
+		(
+			num_features_,
+			binary_data_->Size(),
+			parameters.GetBooleanParameter("incremental-frequency")
+		);
+
+		specialised_solver2_ = new SpecialisedBinaryClassificationDecisionTreeSolver
+		(
+			num_features_,
+			binary_data_->Size(),
+			parameters.GetBooleanParameter("incremental-frequency")
+		);
+	}
+	else
+	{
+		specialised_solver1_ = new SpecialisedGeneralClassificationDecisionTreeSolver
+		(
+			num_labels_,
+			num_features_,
+			binary_data_->Size(),
+			parameters.GetBooleanParameter("incremental-frequency")
+		);
+
+		specialised_solver2_ = new SpecialisedGeneralClassificationDecisionTreeSolver
+		(
+			num_labels_,
+			num_features_,
+			binary_data_->Size(),
+			parameters.GetBooleanParameter("incremental-frequency")
+		);
+	}
+}
+
 Solver::Solver(ParameterHandler& parameters):
 	verbose_(parameters.GetBooleanParameter("verbose")),
 	cache_(0),
@@ -115,7 +234,7 @@ Solver::~Solver()
 	for (int i = 0; i < feature_selectors_.size(); i++) { delete feature_selectors_[i]; }
 }
 
-void Solver::ReplaceData(std::vector<std::vector<FeatureVectorBinary> >& new_instances)
+void Solver::ReplaceData(std::vector<std::vector<FeatureVectorBinary>>& new_instances)
 {
 	runtime_assert(new_instances.size() == binary_data_->NumLabels());
 

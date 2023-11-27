@@ -68,6 +68,9 @@
     <ClCompile Include="code\MurTree\Utilities\parameter_handler.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="code\MurTree\Utilities\parameters.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Data Structures">
@@ -175,6 +178,9 @@
       <Filter>Utilities</Filter>
     </ClInclude>
     <ClInclude Include="code\MurTree\Utilities\parameter_handler.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="code\MurTree\Utilities\parameters.h">
       <Filter>Utilities</Filter>
     </ClInclude>
     <ClInclude Include="code\MurTree\Utilities\runtime_assert.h">

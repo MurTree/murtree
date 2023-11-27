@@ -15,6 +15,7 @@
 #include "../Utilities/solver_result.h"
 #include "../Utilities/statistics.h"
 #include "../Utilities/parameter_handler.h"
+#include "../Data Structures/feature_vector_binary.h"
 
 namespace MurTree
 {
@@ -22,6 +23,7 @@ class Solver
 {
 public:
 	Solver(ParameterHandler &solver_parameters);
+	Solver(ParameterHandler &solver_parameters, const std::vector<std::vector<FeatureVectorBinary>>& feature_vectors);
 	~Solver();
 
 	SolverResult Solve(ParameterHandler &runtime_parameters);

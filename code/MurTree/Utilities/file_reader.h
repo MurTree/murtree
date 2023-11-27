@@ -4,6 +4,7 @@
 #pragma once
 
 #include <string>
+#include <cstdint>
 
 #include "../Data Structures/feature_vector_binary.h"
 #include "split_data.h"
